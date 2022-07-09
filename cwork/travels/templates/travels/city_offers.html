@@ -6,8 +6,8 @@
 	<h1>Подборка туров по России</h1>
 	<h2>Подборка по городам</h2>
 	<ul>
-		{% for offer in offers  %}
-			<li><a href="#">{{ offer.title }}</a></li>
+		{% for service in services  %}
+			<li><a href="#">{{ service.title }}</a></li>
 		{% endfor %}
 	</ul>
 {% endblock %}
