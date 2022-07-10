@@ -2,15 +2,22 @@
 
 {% block title %} Список заказов {% endblock %}
 
-{% block content %} 
-	<h2>Заказы для компани...</h2>
-	<p>Всего заказов: {{total}}</p>
-	<ul>
-		{% for order in orders  %}
-			<p>{{order.service}}</p>
-			<p>{{order.name}}</p>
-			<br>
-		{% endfor %}
-	</ul>
+{% block content %}
+	<section class="orders">
+		<div class="main__wrapper">
+			<h1 class="orders__heading">Заказы для компании...</h1>
+			<p class="orders__count">Всего заказов: {{total}}</p>
+			<ul class="orders__list">
+				{% for order in orders  %}
+					<p class="orders__title">{{order.service}}</p>
+					<p>Имя: {{order.name}}</p>
+					<p>Номер: {{order.number}}</p>
+					<br class="orders__line">
+				{% endfor %}
+			</ul>
+		</div>
+	</section>
+	
+
 
 {% endblock %}

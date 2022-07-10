@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{% block title %} {% endblock %}  </title>
-	<link rel="stylesheet" href="{% static 'travels/style.css' %}">
+	<link rel="stylesheet" href="{% static 'travels/css/style.css' %}">
 </head>
 <body>
 	<header class="header">
@@ -17,15 +17,15 @@
 					<a class="nav__link" href="/main">Главная</a>
 				</li>
 				<li class="nav__list">
-					<a class="nav__link" href="/admin">Админка(для Администраторов)</a>
+					<a class="nav__link" href="/admin">Админка</a>
 				</li>
 				<li class="nav__list">
-					<a class="nav__link" href="/list_order">Список заказов(для компаний)</a>
+					<a class="nav__link" href="/list_order">Список заказов</a>
 				</li>
 
 			</nav>
 			{# <p class="header__greetings">Здравствуйте,{% block user_name %}  {% endblock %}</p> #}
-			 
+			<a href="/" class="header__exit">Войти</a>
 		</div>
 	</header>
 

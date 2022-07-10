@@ -29,7 +29,7 @@ def tour(request, slug_tour:str):
 				number=form.cleaned_data['number'],
 				)
 			feed.save()
-			return HttpResponseRedirect('/admin')
+			return HttpResponseRedirect('/done')
 	else:
 		form = OrderForm()
 	return render(request, 'travels/tour.html', context={'form': form, 'service': service})
@@ -56,6 +56,8 @@ def list_order(request):
 	orders = Order.objects.all()
 	return render(request, 'travels/list_order.html' , {'orders': orders, 'total': orders.count()})
 
+def done(request):
+	return render(request, 'travels/done.html')
 
 class NewsUpdateView(UpdateView):
 	model = Order

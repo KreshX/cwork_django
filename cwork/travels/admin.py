@@ -4,6 +4,27 @@ from django.db.models import QuerySet
 from django.contrib.auth.models import User
 
 
+class RatingFilter(admin.SimpleListFilter):
+	title = 'Бюджет'
+	parameter_name = 'price'
+
+	def lookups(self, request, model_admin):
+		return [
+			('<13', 'Низкий'),
+			('от 13 до 15', 'Средний'),
+			('>=15', 'Высокий'),
+		]
+
+	def queryset(self, request, queryset:QuerySet):
+		if self.value()=='<13':
+			return queryset.filter(price__lt=13000)
+		if self.value()=='от 13 до 15':
+			return queryset.filter(price__gte=13000).filter(price__lt=15000)
+		if self.value()=='>=15':
+			return queryset.filter(price__gte=15000)
+		return queryset
+
+
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
 	list_display = [ 'id', 'name', 'slug']
@@ -17,6 +38,7 @@ class ServiceAdmin(admin.ModelAdmin):
 	list_editable = ['title', 'slug', 'offers', 'price']
 	prepopulated_fields = {'slug' : ('title', )}
 	actions = ['set_rubles']
+	list_filter= [RatingFilter]
 
 	@admin.action(description = 'Установить валюту в рубли')
 	def set_rubles(self, request, qs:QuerySet):

@@ -3,10 +3,18 @@
 {% block title %} Главная {% endblock %}
 
 {% block content %}
-	<h1>Туры по городам России</h1>
-	<ul>
-		{% for city in cities  %}
-			<li><a href="{{city.get_url}}">{{ city.name }}</a></li>
-		{% endfor %}
-	</ul>
+ 	<section class="main">
+ 		<div class="main__wrapper">
+ 			<h1 class="main__heading">Туры по городам России</h1>
+ 			<ul class="main__list">
+ 				{% for city in cities  %}
+ 					<li class="main__item">
+ 						<a class="main__link" href="{{city.get_url}}">{{ city.name }}</a>
+ 					</li>
+ 				{% endfor %}
+ 			</ul>
+ 		</div>
+ 	</section>
+	
+	
 {% endblock %}
