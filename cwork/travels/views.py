@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from .models import City, Offer, Service
+from .models import City, Offer, Service, Order
+from django.http import HttpResponseRedirect
+from .forms import OrderForm
 
 def main(request):
 	cities = City.objects.all()
@@ -17,4 +19,17 @@ def tour(request, slug_tour:str):
 	return render(request, 'travels/tour.html', {'service': service})
 
 def login(request):
-	return render(request, 'travels/login.html')	
+	if request.method == 'POST':
+		form = OrderForm(request.POST)
+		if form.is_valid():
+			print(form.cleaned_data)
+			feed = Order(service=Service.objects.all()[0],
+				name=form.cleaned_data['name'],
+				number=form.cleaned_data['number'],
+				)
+			feed.save()
+			return HttpResponseRedirect('admin')
+	else:
+		form = OrderForm()
+	return render(request, 'travels/tour.html', context={'form': form})
+	# return render(request, 'travels/login.html')	

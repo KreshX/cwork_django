@@ -1,6 +1,8 @@
 from django import forms
 
-class FeedbackForm(forms.Form):
+class OrderForm(forms.Form):
+	name = forms.CharField(label='Имя')
+	number = forms.CharField(label='Номер телефона')
 
 	# name = forms.CharField(label='Имя')
 	# surname = forms.CharField(label='Фамилия')

@@ -39,3 +39,11 @@ class Service(models.Model):
 
 	def __str__(self):
 		return f'{self.title}'
+
+
+class Order(models.Model):
+	service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, blank=True)
+	name = models.CharField(max_length=40)
+	number = models.CharField(max_length=40)
+	def __str__(self):
+		return f'{self.service}'
