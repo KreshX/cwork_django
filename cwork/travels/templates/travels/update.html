@@ -4,13 +4,6 @@
 
 {% block content %} 
 	<h2>Заказы для компани...</h2>
-	<p>Всего заказов: {{total}}</p>
 	<ul>
-		{% for order in orders  %}
-			<p>{{order.service}}</p>
-			<p>{{order.name}}</p>
-			<br>
-		{% endfor %}
 	</ul>
-
 {% endblock %}

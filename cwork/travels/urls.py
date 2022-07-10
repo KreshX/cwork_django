@@ -8,4 +8,5 @@ urlpatterns = [
     path('offers/<slug:slug_city_offers>', views.city_offers, name='city_offers-detail'),
     path('offer/<slug:slug_tour>', views.tour, name='tour-detail'),
     path('list_order/', views.list_order),
+    path('change/<int:pk>/update', views.NewsUpdateView.as_view(), name='order-update' )
 ]

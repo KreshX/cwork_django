@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import City, Offer, Service, Order
 from django.http import HttpResponseRedirect
 from .forms import OrderForm
+from django.views.generic import UpdateView
+from django.db.models import F, Sum, Min, Max,Count, Avg
 
 def main(request):
 	cities = City.objects.all()
@@ -12,7 +14,8 @@ def main(request):
 def city_offers(request, slug_city_offers:str):
 	city_offers = get_object_or_404(City, slug=slug_city_offers)
 	services = Service.objects.filter(offers=city_offers.id)
-	return render(request, 'travels/city_offers.html', {'city_offers': city_offers, 'services': services})
+	agg = services.aggregate(Avg('price'), Max('price'), Min('price'))
+	return render(request, 'travels/city_offers.html', {'city_offers': city_offers, 'agg':agg, 'services': services})
 
 def tour(request, slug_tour:str):
 	service = get_object_or_404(Service, slug=slug_tour)
@@ -51,4 +54,10 @@ def login(request):
 
 def list_order(request):
 	orders = Order.objects.all()
-	return render(request, 'travels/list_order.html' , {'orders': orders})
+	return render(request, 'travels/list_order.html' , {'orders': orders, 'total': orders.count()})
+
+
+class NewsUpdateView(UpdateView):
+	model = Order
+	template_name = 'travels/update.html'
+	fields = ['number']
