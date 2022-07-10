@@ -1,23 +1,31 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{% block title %} {% endblock %}  </title>
+	<link rel="stylesheet" href="{% static 'travels/style.css' %}">
 </head>
 <body>
-	<header>
-		<img src="" alt="logo">
-		<nav>
-			<li>
-				<a href="/main">Главная</a>
-			</li>
-			<li>
-				<a href="/admin">Избранное</a>
-			</li>
-		</nav>
-		<p>Здравствуйте,{% block user_name %}  {% endblock %}</p>
-		<a href="/">Выйти</a>	
+	<header class="header">
+		<div class="header__wrapper">
+			<img class="header__logo" src="{% static 'travels/img/logo.svg' %}" alt="logo">
+			<nav class="header__nav nav">
+				<li class="nav__list">
+					<a class="nav__link" href="/main">Главная</a>
+				</li>
+				<li class="nav__list">
+					<a class="nav__link" href="/admin">Избранное</a>
+				</li>
+				<li>
+					<a class="header__exit" href="{% url 'register' %}">Ристрация</a> | <a class="header__exit" href="{% url 'login' %}">Войти</a>
+				</li>
+			</nav>
+			{# <p class="header__greetings">Здравствуйте,{% block user_name %}  {% endblock %}</p> #}
+			 
+		</div>
 	</header>
 
 

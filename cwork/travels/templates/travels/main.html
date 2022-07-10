@@ -2,9 +2,8 @@
 
 {% block title %} Главная {% endblock %}
 
-{% block content %} 
-	<h1>Подборка туров по России</h1>
-	<h2>Подборка по городам</h2>
+{% block content %}
+	<h1>Туры по городам России</h1>
 	<ul>
 		{% for city in cities  %}
 			<li><a href="{{city.get_url}}">{{ city.name }}</a></li>
