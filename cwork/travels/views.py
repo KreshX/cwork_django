@@ -16,20 +16,34 @@ def city_offers(request, slug_city_offers:str):
 
 def tour(request, slug_tour:str):
 	service = get_object_or_404(Service, slug=slug_tour)
-	return render(request, 'travels/tour.html', {'service': service})
-
-def login(request):
 	if request.method == 'POST':
 		form = OrderForm(request.POST)
 		if form.is_valid():
 			print(form.cleaned_data)
-			feed = Order(service=Service.objects.all()[0],
+			# a = get_object_or_404(Service, slug=slug_tour)
+			feed = Order( service = get_object_or_404(Service, slug=slug_tour),
 				name=form.cleaned_data['name'],
 				number=form.cleaned_data['number'],
 				)
 			feed.save()
-			return HttpResponseRedirect('admin')
+			return HttpResponseRedirect('/admin')
 	else:
 		form = OrderForm()
-	return render(request, 'travels/tour.html', context={'form': form})
+	return render(request, 'travels/tour.html', context={'form': form, 'service': service})
+	# return render(request, 'travels/tour.html', {'service': service})
+
+def login(request):
+	# if request.method == 'POST':
+	# 	form = OrderForm(request.POST)
+	# 	if form.is_valid():
+	# 		print(form.cleaned_data)
+	# 		feed = Order(service=Service.objects.all()[0],
+	# 			name=form.cleaned_data['name'],
+	# 			number=form.cleaned_data['number'],
+	# 			)
+	# 		feed.save()
+	# 		return HttpResponseRedirect('admin')
+	# else:
+	# 	form = OrderForm()
+	return render(request, 'travels/login.html')
 	# return render(request, 'travels/login.html')	
