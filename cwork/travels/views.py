@@ -2,11 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import City, Offer, Service, Order
 from django.http import HttpResponseRedirect
 from .forms import OrderForm
-from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import ListView, DetailView, CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse_lazy
 
 def main(request):
 	cities = City.objects.all()
@@ -54,8 +49,6 @@ def login(request):
 	# return render(request, 'travels/login.html')	
 
 
-
-class RegisterUser(CreateView):
-	form_class = UserCreationForm
-	template_name = 'travels/register.html'
-	success_url = reverse_lazy('login')
+def list_order(request):
+	orders = Order.objects.all()
+	return render(request, 'travels/list_order.html' , {'orders': orders})
