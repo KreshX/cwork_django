@@ -31,10 +31,23 @@ class City(models.Model):
 
 class Service(models.Model):
 
+	EUR = 'EUR'
+	USD = 'USD'
+	RUB = 'RUB'
+
+	CURRENCY_CHOICES = [
+        (EUR, 'Euro'),
+        (USD, 'Dollars'),
+        (RUB, 'Rubles'),
+    ]
+
+
+
 	title = models.CharField(max_length=40)
 	slug = models.SlugField(default='', null=False, blank=True)
 	offers = models.ForeignKey(City, on_delete=models.PROTECT, null=True, blank=True)
 	price = models.IntegerField(default='10325')
+	currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='RUB')
 	def get_url(self):
 		return reverse('tour-detail', args=[self.slug])
 
